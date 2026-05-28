@@ -1,0 +1,98 @@
+.share-buttons-container {
+  padding-top: 1.5rem;
+  border-top: 1px solid #e0e0e0;
+}
+
+.share-label {
+  margin: 0 0 0.75rem;
+  font-size: 0.95rem;
+  color: #555;
+  text-align: center;
+}
+
+.share-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.btn {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s, box-shadow 0.2s;
+
+  &:focus-visible {
+    outline: 2px solid #3498db;
+    outline-offset: 2px;
+  }
+
+  &--share {
+    padding: 0.6rem 1.25rem;
+    font-size: 0.9rem;
+  }
+
+  &--twitter {
+    background: #1da1f2;
+    color: #fff;
+
+    &:hover {
+      background: #0d8ecf;
+    }
+  }
+
+  &--linkedin {
+    background: #0077b5;
+    color: #fff;
+
+    &:hover {
+      background: #005f8f;
+    }
+  }
+
+  &--copy {
+    background: #6c757d;
+    color: #fff;
+
+    &:hover {
+      background: #545b62;
+    }
+  }
+}
+
+.share-fallback {
+  margin-top: 1rem;
+  text-align: center;
+
+  &__label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 0.85rem;
+    color: #666;
+  }
+
+  &__textarea {
+    width: 100%;
+    max-width: 400px;
+    min-height: 60px;
+    padding: 0.75rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-family: inherit;
+    font-size: 0.9rem;
+    resize: none;
+    background: #f8f9fa;
+    color: #333;
+    cursor: text;
+
+    &:focus {
+      outline: 2px solid #3498db;
+      outline-offset: 1px;
+    }
+  }
+}

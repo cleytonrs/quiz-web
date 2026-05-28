@@ -1,0 +1,170 @@
+.dashboard-container {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 1rem;
+}
+
+.dashboard-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+
+  h1 {
+    margin: 0;
+    font-size: 1.75rem;
+    color: #1a1a2e;
+  }
+}
+
+.take-quiz-button {
+  display: inline-block;
+  padding: 0.6rem 1.25rem;
+  border-radius: 6px;
+  background: #3498db;
+  color: #fff;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: background-color 0.2s;
+
+  &:hover,
+  &:focus-visible {
+    background: #2980b9;
+  }
+
+  &:focus-visible {
+    outline: 2px solid #3498db;
+    outline-offset: 2px;
+  }
+}
+
+.loading-state,
+.error-state,
+.empty-state {
+  text-align: center;
+  padding: 2rem;
+  color: #555;
+}
+
+.error-state {
+  color: #c0392b;
+
+  p {
+    margin-bottom: 1rem;
+  }
+}
+
+.retry-button {
+  padding: 0.5rem 1.25rem;
+  border: 1px solid #c0392b;
+  border-radius: 4px;
+  background: transparent;
+  color: #c0392b;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s;
+
+  &:hover,
+  &:focus-visible {
+    background: #c0392b;
+    color: #fff;
+  }
+}
+
+.empty-state {
+  p {
+    margin-bottom: 1rem;
+    font-size: 1rem;
+  }
+}
+
+.take-quiz-link {
+  color: #3498db;
+  text-decoration: none;
+  font-weight: 500;
+
+  &:hover,
+  &:focus-visible {
+    text-decoration: underline;
+  }
+}
+
+.sessions-table-wrapper {
+  overflow-x: auto;
+}
+
+.sessions-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+
+  th,
+  td {
+    padding: 0.75rem 1rem;
+    text-align: left;
+    border-bottom: 1px solid #e0e0e0;
+  }
+
+  thead th {
+    background: #f8f9fa;
+    font-weight: 600;
+    color: #1a1a2e;
+    white-space: nowrap;
+  }
+
+  tbody tr {
+    transition: background-color 0.15s;
+
+    &:hover {
+      background: #f8f9fa;
+    }
+  }
+}
+
+.session-topic {
+  font-weight: 500;
+  color: #1a1a2e;
+}
+
+.session-score {
+  white-space: nowrap;
+
+  .score-fraction {
+    font-weight: 600;
+  }
+
+  .score-percentage {
+    margin-left: 0.35rem;
+    color: #666;
+    font-size: 0.85rem;
+  }
+}
+
+.result-badge {
+  display: inline-block;
+  padding: 0.2rem 0.6rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+
+  &--pass {
+    background: #d4edda;
+    color: #155724;
+  }
+
+  &--fail {
+    background: #f8d7da;
+    color: #721c24;
+  }
+}
+
+.session-date {
+  white-space: nowrap;
+  color: #555;
+  font-size: 0.9rem;
+}

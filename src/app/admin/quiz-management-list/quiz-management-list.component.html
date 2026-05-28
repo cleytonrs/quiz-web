@@ -1,0 +1,51 @@
+<div class="quiz-management-container">
+  <div class="quiz-management__header">
+    <h1 class="quiz-management__title">Quiz Management</h1>
+    <button class="btn btn-primary" (click)="navigateToCreate()">Create New Quiz</button>
+  </div>
+
+  @if (loading()) {
+    <div class="loading-state" aria-live="polite">
+      <p>Loading quizzes...</p>
+    </div>
+  }
+
+  @if (error()) {
+    <div class="error-state" role="alert">
+      <p class="error-message">{{ error() }}</p>
+      <button class="btn btn-secondary" (click)="loadQuizzes()">Retry</button>
+    </div>
+  }
+
+  @if (!loading() && !error()) {
+    @if (quizzes().length === 0) {
+      <div class="empty-state">
+        <p>No quizzes found. Create your first quiz to get started.</p>
+      </div>
+    } @else {
+      <ul class="quiz-list" aria-label="Quiz list">
+        @for (quiz of quizzes(); track quiz.id) {
+          <li class="quiz-card">
+            <div class="quiz-card__content">
+              <h2 class="quiz-card__topic">{{ quiz.topicName }}</h2>
+              <p class="quiz-card__description">{{ quiz.description }}</p>
+              <span class="quiz-card__question-count">{{ quiz.questionCount }} {{ quiz.questionCount === 1 ? 'question' : 'questions' }}</span>
+            </div>
+            <div class="quiz-card__actions">
+              <button class="btn btn-edit" (click)="navigateToEdit(quiz.id)" [attr.aria-label]="'Edit ' + quiz.topicName">Edit</button>
+              <button class="btn btn-delete" (click)="openDeleteDialog(quiz)" [attr.aria-label]="'Delete ' + quiz.topicName">Delete</button>
+            </div>
+          </li>
+        }
+      </ul>
+    }
+  }
+
+  <app-confirm-dialog
+    [title]="'Delete Quiz'"
+    [message]="'Are you sure you want to delete \'' + (quizToDelete?.topicName ?? '') + '\'? This action cannot be undone.'"
+    [visible]="deleteDialogVisible"
+    (confirmed)="onDeleteConfirmed()"
+    (cancelled)="onDeleteCancelled()"
+  />
+</div>

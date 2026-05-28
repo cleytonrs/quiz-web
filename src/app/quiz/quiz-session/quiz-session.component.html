@@ -1,0 +1,51 @@
+<div class="quiz-session-container">
+  @if (loading()) {
+    <output class="loading-state" aria-live="polite">
+      <p>Loading quiz...</p>
+    </output>
+  }
+
+  @if (error()) {
+    <div class="error-state" role="alert">
+      <p>{{ error() }}</p>
+    </div>
+  }
+
+  @if (!loading() && !error() && currentQuestion()) {
+    <section class="quiz-session" aria-label="Quiz session">
+      <header class="quiz-session__header">
+        <h1 class="quiz-session__title">{{ quiz()?.topicName }}</h1>
+        <p class="quiz-session__progress" aria-live="polite" aria-atomic="true">
+          Question {{ currentQuestionNumber() }} of {{ totalQuestions() }}
+        </p>
+        <progress
+          class="progress-bar"
+          [attr.value]="currentQuestionNumber()"
+          [attr.max]="totalQuestions()"
+          [attr.aria-label]="'Progress: question ' + currentQuestionNumber() + ' of ' + totalQuestions()"
+        ></progress>
+      </header>
+
+      <section class="question-section" aria-labelledby="question-text">
+        <h2 id="question-text" class="question-section__text">
+          {{ currentQuestion()?.text }}
+        </h2>
+
+        <fieldset class="answer-options" aria-label="Answer options">
+          <legend class="visually-hidden">Select an answer</legend>
+          @for (option of currentQuestion()?.answerOptions; track option.id) {
+            <button
+              class="answer-option"
+              [disabled]="submitting()"
+              [attr.aria-disabled]="submitting()"
+              (click)="selectAnswer(option)"
+              [attr.aria-label]="option.text"
+            >
+              {{ option.text }}
+            </button>
+          }
+        </fieldset>
+      </section>
+    </section>
+  }
+</div>

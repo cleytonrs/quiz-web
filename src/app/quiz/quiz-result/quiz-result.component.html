@@ -1,0 +1,64 @@
+<main class="quiz-result-container" aria-labelledby="result-heading">
+  <!-- Loading State -->
+  @if (loading()) {
+    <div class="loading-state" aria-live="polite" aria-busy="true">
+      <p>Loading your results...</p>
+    </div>
+  }
+
+  <!-- Error State -->
+  @if (error()) {
+    <div class="error-state" role="alert">
+      <p>{{ error() }}</p>
+      <button class="btn btn--primary" (click)="navigateToQuizzes()">
+        Back to Quizzes
+      </button>
+    </div>
+  }
+
+  <!-- Result Display -->
+  @if (!loading() && !error() && result()) {
+    <div class="result-card" [class.result-card--pass]="result()!.passed" [class.result-card--fail]="!result()!.passed">
+      <div class="result-card__icon" aria-hidden="true">
+        @if (result()!.passed) {
+          <span class="icon icon--pass">✓</span>
+        } @else {
+          <span class="icon icon--fail">✗</span>
+        }
+      </div>
+
+      <h1 id="result-heading" class="result-card__title">
+        {{ result()!.quizTopicName }}
+      </h1>
+
+      <p class="result-card__message" [class.result-card__message--pass]="result()!.passed" [class.result-card__message--fail]="!result()!.passed" aria-live="polite">
+        {{ passMessage() }}
+      </p>
+
+      <ul class="result-card__stats" aria-label="Quiz statistics">
+        <li class="stat">
+          <span class="stat__label">Score</span>
+          <span class="stat__value">{{ percentageText() }}</span>
+        </li>
+        <li class="stat">
+          <span class="stat__label">Correct Answers</span>
+          <span class="stat__value">{{ scoreText() }}</span>
+        </li>
+        <li class="stat">
+          <span class="stat__label">Time Elapsed</span>
+          <span class="stat__value">{{ formattedTime() }}</span>
+        </li>
+      </ul>
+
+      <div class="result-card__share">
+        <app-share-buttons [quizResult]="result()!"></app-share-buttons>
+      </div>
+
+      <div class="result-card__actions">
+        <button class="btn btn--primary" (click)="navigateToQuizzes()">
+          Back to Quizzes
+        </button>
+      </div>
+    </div>
+  }
+</main>

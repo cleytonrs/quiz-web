@@ -1,0 +1,63 @@
+<div class="dashboard-container">
+  <header class="dashboard-header">
+    <h1>Your Quiz History</h1>
+    <a routerLink="/quizzes" class="take-quiz-button">Take a Quiz</a>
+  </header>
+
+  @if (loading()) {
+    <output class="loading-state" aria-live="polite">
+      <p>Loading your quiz history...</p>
+    </output>
+  }
+
+  @if (error()) {
+    <div class="error-state" role="alert">
+      <p>{{ error() }}</p>
+      <button (click)="loadDashboard()" class="retry-button">Retry</button>
+    </div>
+  }
+
+  @if (!loading() && !error()) {
+    @if (sessions().length === 0) {
+      <div class="empty-state">
+        <p>You haven't completed any quizzes yet.</p>
+        <a routerLink="/quizzes" class="take-quiz-link">Browse available quizzes</a>
+      </div>
+    } @else {
+      <section class="sessions-table-wrapper" aria-label="Quiz session history">
+        <table class="sessions-table" aria-label="Completed quiz sessions">
+          <thead>
+            <tr>
+              <th scope="col">Quiz Topic</th>
+              <th scope="col">Score</th>
+              <th scope="col">Result</th>
+              <th scope="col">Completed</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (session of sessions(); track session.sessionId) {
+              <tr>
+                <td class="session-topic">{{ session.quizTopicName }}</td>
+                <td class="session-score">
+                  <span class="score-fraction">{{ getScoreDisplay(session) }}</span>
+                  <span class="score-percentage">({{ getScorePercentage(session) }}%)</span>
+                </td>
+                <td class="session-result">
+                  <span
+                    class="result-badge"
+                    [class.result-badge--pass]="session.passed"
+                    [class.result-badge--fail]="!session.passed"
+                    [attr.aria-label]="session.passed ? 'Passed' : 'Failed'"
+                  >
+                    {{ session.passed ? 'Pass' : 'Fail' }}
+                  </span>
+                </td>
+                <td class="session-date">{{ session.completedAt | date:'medium' }}</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </section>
+    }
+  }
+</div>

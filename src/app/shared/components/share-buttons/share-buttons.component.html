@@ -1,0 +1,42 @@
+<div class="share-buttons-container" aria-label="Share your results">
+  <p class="share-label">Share your result:</p>
+  <div class="share-buttons">
+    <button
+      class="btn btn--share btn--twitter"
+      (click)="shareOnTwitter()"
+      aria-label="Share result on Twitter"
+    >
+      Twitter
+    </button>
+    <button
+      class="btn btn--share btn--linkedin"
+      (click)="shareOnLinkedIn()"
+      aria-label="Share result on LinkedIn"
+    >
+      LinkedIn
+    </button>
+    <button
+      class="btn btn--share btn--copy"
+      (click)="copyToClipboard()"
+      [attr.aria-label]="copied() ? 'Copied to clipboard' : 'Copy result to clipboard'"
+    >
+      {{ copied() ? 'Copied!' : 'Copy' }}
+    </button>
+  </div>
+
+  @if (showFallback()) {
+    <section class="share-fallback" aria-label="Copyable share text">
+      <label for="share-text-area" class="share-fallback__label">
+        Copy your result text:
+      </label>
+      <textarea
+        id="share-text-area"
+        class="share-fallback__textarea"
+        readonly
+        [value]="getShareText()"
+        aria-readonly="true"
+        (click)="$event.target"
+      ></textarea>
+    </section>
+  }
+</div>

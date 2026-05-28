@@ -1,0 +1,38 @@
+<div class="quiz-list-container">
+  <h1>Available Quizzes</h1>
+
+  @if (loading()) {
+    <output class="loading-state" aria-live="polite">
+      <p>Loading quizzes...</p>
+    </output>
+  }
+
+  @if (error()) {
+    <div class="error-state" role="alert">
+      <p>{{ error() }}</p>
+      <button (click)="loadQuizzes()" class="retry-button">Retry</button>
+    </div>
+  }
+
+  @if (!loading() && !error()) {
+    @if (quizzes().length === 0) {
+      <p class="empty-state">No quizzes available at the moment.</p>
+    } @else {
+      <ul class="quiz-grid" aria-label="Available quizzes">
+        @for (quiz of quizzes(); track quiz.id) {
+          <li>
+            <button
+              class="quiz-card"
+              (click)="selectQuiz(quiz)"
+              [attr.aria-label]="quiz.topicName + ' - ' + quiz.questionCount + ' questions'"
+            >
+              <h2 class="quiz-card__topic">{{ quiz.topicName }}</h2>
+              <p class="quiz-card__description">{{ quiz.description }}</p>
+              <span class="quiz-card__count">{{ quiz.questionCount }} questions</span>
+            </button>
+          </li>
+        }
+      </ul>
+    }
+  }
+</div>

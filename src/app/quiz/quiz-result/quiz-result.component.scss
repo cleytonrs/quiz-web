@@ -1,0 +1,147 @@
+.quiz-result-container {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 1rem;
+}
+
+.loading-state,
+.error-state {
+  text-align: center;
+  padding: 2rem;
+  color: #555;
+}
+
+.error-state {
+  color: #c0392b;
+}
+
+.result-card {
+  text-align: center;
+  padding: 2.5rem 2rem;
+  border-radius: 12px;
+  border: 2px solid #e0e0e0;
+  background: #fff;
+
+  &--pass {
+    border-color: #27ae60;
+    background: linear-gradient(180deg, #f0fdf4 0%, #fff 100%);
+  }
+
+  &--fail {
+    border-color: #e74c3c;
+    background: linear-gradient(180deg, #fef2f2 0%, #fff 100%);
+  }
+}
+
+.result-card__icon {
+  margin-bottom: 1rem;
+}
+
+.icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  font-size: 2rem;
+  font-weight: bold;
+
+  &--pass {
+    background: #27ae60;
+    color: #fff;
+  }
+
+  &--fail {
+    background: #e74c3c;
+    color: #fff;
+  }
+}
+
+.result-card__title {
+  margin: 0 0 0.5rem;
+  font-size: 1.75rem;
+  color: #1a1a2e;
+}
+
+.result-card__message {
+  margin: 0 0 2rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+
+  &--pass {
+    color: #27ae60;
+  }
+
+  &--fail {
+    color: #e74c3c;
+  }
+}
+
+.result-card__stats {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin: 0 0 2rem;
+  padding: 0;
+  list-style: none;
+  flex-wrap: wrap;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 1rem 1.5rem;
+  background: #f8f9fa;
+  border-radius: 8px;
+  min-width: 120px;
+}
+
+.stat__label {
+  font-size: 0.85rem;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.stat__value {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #1a1a2e;
+}
+
+.result-card__share {
+  margin-bottom: 2rem;
+}
+
+.btn {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s, box-shadow 0.2s;
+
+  &:focus-visible {
+    outline: 2px solid #3498db;
+    outline-offset: 2px;
+  }
+
+  &--primary {
+    background: #3498db;
+    color: #fff;
+
+    &:hover {
+      background: #2980b9;
+      box-shadow: 0 2px 8px rgba(52, 152, 219, 0.3);
+    }
+  }
+}
+
+.result-card__actions {
+  padding-top: 1rem;
+}

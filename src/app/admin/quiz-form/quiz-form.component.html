@@ -1,0 +1,184 @@
+<div class="quiz-form-container">
+  @if (loading()) {
+    <output class="loading-state" aria-live="polite">
+      <p>Loading quiz...</p>
+    </output>
+  }
+
+  @if (notFound()) {
+    <div class="not-found-state" role="alert">
+      <p>Quiz not found.</p>
+      <button type="button" class="btn btn-secondary" (click)="goBack()">
+        Back to Quizzes
+      </button>
+    </div>
+  }
+
+  @if (!loading() && !notFound()) {
+    <header class="quiz-form__header">
+      <h1 class="quiz-form__title">
+        {{ mode === 'create' ? 'Create New Quiz' : 'Edit Quiz' }}
+      </h1>
+    </header>
+
+    <form [formGroup]="quizForm" (ngSubmit)="onSubmit()" class="quiz-form" novalidate>
+      <div class="form-field">
+        <label for="topicName" class="form-label">Topic Name</label>
+        <input
+          id="topicName"
+          type="text"
+          formControlName="topicName"
+          class="form-input"
+          [attr.aria-invalid]="quizForm.controls.topicName.invalid && quizForm.controls.topicName.touched"
+          aria-describedby="topicName-error"
+        />
+        @if (quizForm.controls.topicName.touched && quizForm.controls.topicName.errors) {
+          <span id="topicName-error" class="form-error" role="alert">
+            @if (quizForm.controls.topicName.errors['required']) {
+              Topic name is required.
+            }
+            @if (quizForm.controls.topicName.errors['serverError']) {
+              {{ quizForm.controls.topicName.errors['serverError'] }}
+            }
+          </span>
+        }
+      </div>
+
+      <div class="form-field">
+        <label for="description" class="form-label">Description</label>
+        <textarea
+          id="description"
+          formControlName="description"
+          class="form-input form-textarea"
+          rows="3"
+          [attr.aria-invalid]="quizForm.controls.description.invalid && quizForm.controls.description.touched"
+          aria-describedby="description-error"
+        ></textarea>
+        @if (quizForm.controls.description.touched && quizForm.controls.description.errors) {
+          <span id="description-error" class="form-error" role="alert">
+            @if (quizForm.controls.description.errors['required']) {
+              Description is required.
+            }
+            @if (quizForm.controls.description.errors['serverError']) {
+              {{ quizForm.controls.description.errors['serverError'] }}
+            }
+          </span>
+        }
+      </div>
+
+      <section class="questions-section" aria-label="Questions">
+        <div class="questions-header">
+          <h2 class="questions-title">Questions</h2>
+          <button type="button" class="btn btn-add" (click)="addQuestion()">
+            + Add Question
+          </button>
+        </div>
+
+        <div formArrayName="questions">
+          @for (question of questions.controls; track $index; let qi = $index) {
+            <fieldset class="question-card" [formGroupName]="qi">
+              <legend class="question-legend">Question {{ qi + 1 }}</legend>
+
+              <div class="question-header">
+                <div class="form-field question-text-field">
+                  <label [for]="'question-' + qi" class="form-label">Question Text</label>
+                  <input
+                    [id]="'question-' + qi"
+                    type="text"
+                    formControlName="text"
+                    class="form-input"
+                    [attr.aria-invalid]="question.get('text')?.invalid && question.get('text')?.touched"
+                    [attr.aria-describedby]="'question-' + qi + '-error'"
+                  />
+                  @if (question.get('text')?.touched && question.get('text')?.errors) {
+                    <span [id]="'question-' + qi + '-error'" class="form-error" role="alert">
+                      @if (question.get('text')?.errors?.['required']) {
+                        Question text is required.
+                      }
+                      @if (question.get('text')?.errors?.['serverError']) {
+                        {{ question.get('text')?.errors?.['serverError'] }}
+                      }
+                    </span>
+                  }
+                </div>
+                @if (questions.length > 1) {
+                  <button
+                    type="button"
+                    class="btn btn-remove"
+                    (click)="removeQuestion(qi)"
+                    [attr.aria-label]="'Remove question ' + (qi + 1)"
+                  >
+                    Remove
+                  </button>
+                }
+              </div>
+
+              <div class="answer-options-section" formArrayName="answerOptions">
+                <p class="answer-options-label">Answer Options (select the correct one):</p>
+                @for (option of getAnswerOptions(qi).controls; track $index; let ai = $index) {
+                  <div class="answer-option-row" [formGroupName]="ai">
+                    <input
+                      type="radio"
+                      [name]="'correct-answer-' + qi"
+                      [id]="'question-' + qi + '-answer-' + ai + '-radio'"
+                      [checked]="option.get('isCorrect')?.value"
+                      (change)="setCorrectAnswer(qi, ai)"
+                      class="answer-radio"
+                      [attr.aria-label]="'Mark answer ' + (ai + 1) + ' as correct for question ' + (qi + 1)"
+                    />
+                    <div class="form-field answer-text-field">
+                      <label [for]="'question-' + qi + '-answer-' + ai" class="visually-hidden">
+                        Answer option {{ ai + 1 }}
+                      </label>
+                      <input
+                        [id]="'question-' + qi + '-answer-' + ai"
+                        type="text"
+                        formControlName="text"
+                        class="form-input"
+                        [placeholder]="'Answer option ' + (ai + 1)"
+                        [attr.aria-invalid]="option.get('text')?.invalid && option.get('text')?.touched"
+                        [attr.aria-describedby]="'question-' + qi + '-answer-' + ai + '-error'"
+                      />
+                      @if (option.get('text')?.touched && option.get('text')?.errors) {
+                        <span [id]="'question-' + qi + '-answer-' + ai + '-error'" class="form-error" role="alert">
+                          @if (option.get('text')?.errors?.['required']) {
+                            Answer text is required.
+                          }
+                          @if (option.get('text')?.errors?.['serverError']) {
+                            {{ option.get('text')?.errors?.['serverError'] }}
+                          }
+                        </span>
+                      }
+                    </div>
+                  </div>
+                }
+                @if (question.errors?.['exactlyOneCorrect'] && question.touched) {
+                  <span class="form-error" role="alert">
+                    You must select exactly one correct answer.
+                  </span>
+                }
+              </div>
+            </fieldset>
+          }
+        </div>
+      </section>
+
+      <div class="form-actions">
+        <button type="button" class="btn btn-secondary" (click)="goBack()">
+          Cancel
+        </button>
+        <button
+          type="submit"
+          class="btn btn-primary"
+          [disabled]="submitting()"
+        >
+          @if (submitting()) {
+            Saving...
+          } @else {
+            {{ mode === 'create' ? 'Create Quiz' : 'Update Quiz' }}
+          }
+        </button>
+      </div>
+    </form>
+  }
+</div>

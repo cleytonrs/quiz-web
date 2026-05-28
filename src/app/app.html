@@ -1,0 +1,22 @@
+<nav class="navbar">
+  <div class="navbar-brand">
+    <a routerLink="/quizzes" class="brand-link">Quiz App</a>
+  </div>
+  <div class="navbar-nav">
+    <a routerLink="/quizzes" routerLinkActive="active" class="nav-link">Quizzes</a>
+    @if (isAuthenticated) {
+      <a routerLink="/admin/quizzes" routerLinkActive="active" class="nav-link">Manage Quizzes</a>
+      <a routerLink="/dashboard" routerLinkActive="active" class="nav-link">Dashboard</a>
+      <button (click)="logout()" class="nav-link btn-link">Logout</button>
+    } @else {
+      <a routerLink="/auth/login" routerLinkActive="active" class="nav-link">Login</a>
+      <a routerLink="/auth/register" routerLinkActive="active" class="nav-link">Register</a>
+    }
+  </div>
+</nav>
+
+<main class="main-content">
+  <router-outlet />
+</main>
+
+<app-toast />
