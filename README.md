@@ -248,3 +248,6 @@ ng serve --port 4201
 ### Proxy not working
 
 Ensure `angular.json` has `"proxyConfig": "proxy.conf.json"` under `serve > options`. The proxy only works with `ng serve`, not with production builds.
+
+## License
+This project is licensed under the MIT License.
