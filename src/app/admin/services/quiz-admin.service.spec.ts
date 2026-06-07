@@ -10,9 +10,7 @@ import { QuizDetail } from '../../shared/models/quiz.models';
  * Unit tests for QuizAdminService
  *
  * Tests successful create, update, delete calls and error handling scenarios.
- *
- * **Validates: Requirements 7.1, 7.2, 7.3**
- */
+**/
 
 describe('QuizAdminService', () => {
   let service: QuizAdminService;

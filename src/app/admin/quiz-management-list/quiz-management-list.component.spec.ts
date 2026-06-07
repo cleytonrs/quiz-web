@@ -11,9 +11,7 @@ import { QuizSummary } from '../../shared/models/quiz.models';
  *
  * Tests loading state, error state with retry, create button navigation,
  * and delete confirmation flow.
- *
- * **Validates: Requirements 2.3, 2.4, 2.5, 5.1**
- */
+**/
 
 describe('QuizManagementListComponent', () => {
   let fixture: ComponentFixture<QuizManagementListComponent>;

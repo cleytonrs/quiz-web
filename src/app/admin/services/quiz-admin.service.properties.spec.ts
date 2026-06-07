@@ -15,9 +15,7 @@ import { CreateQuizRequest, UpdateQuizRequest, CreateQuestionRequest, CreateAnsw
  * SHALL issue a PUT request to `/api/quizzes/{id}` with that payload.
  * *For any* valid quiz ID, calling `QuizAdminService.deleteQuiz()` SHALL issue a DELETE request
  * to `/api/quizzes/{id}`.
- *
- * **Validates: Requirements 7.1, 7.2, 7.3**
- */
+**/
 
 // --- Arbitraries ---
 

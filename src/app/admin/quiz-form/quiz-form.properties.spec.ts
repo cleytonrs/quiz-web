@@ -15,9 +15,7 @@ import { NotificationService } from '../../core/services/notification.service';
  * in the form. *For any* quiz form with N questions where N > 1, removing a question SHALL result
  * in N-1 questions. *For any* quiz form with exactly 1 question, removal SHALL be prevented and
  * the form SHALL retain 1 question.
- *
- * **Validates: Requirements 3.2, 3.3, 4.3**
- */
+**/
 
 describe('Feature: quiz-crud-frontend, Property 2: Question Add/Remove Invariant', () => {
   let component: QuizFormComponent;
@@ -120,9 +118,7 @@ describe('Feature: quiz-crud-frontend, Property 2: Question Add/Remove Invariant
  * the QuizFormComponent and then extracting the form values as a request DTO SHALL produce data
  * equivalent to the original QuizDetail (matching topic name, description, question texts, answer
  * option texts, and correct answer selections).
- *
- * **Validates: Requirements 4.1**
- */
+**/
 
 describe('Feature: quiz-crud-frontend, Property 3: Form Population Round-Trip', () => {
   let component: QuizFormComponent;
@@ -240,9 +236,7 @@ describe('Feature: quiz-crud-frontend, Property 3: Form Population Round-Trip', 
  *
  * *For any* quiz form with N questions (N ≥ 1), each question's answer options FormArray SHALL
  * contain exactly 4 controls, regardless of how many questions have been added or removed.
- *
- * **Validates: Requirements 6.1**
- */
+**/
 
 describe('Feature: quiz-crud-frontend, Property 5: Answer Option Structure Invariant', () => {
   let component: QuizFormComponent;
@@ -310,9 +304,7 @@ describe('Feature: quiz-crud-frontend, Property 5: Answer Option Structure Invar
  * *For any* question in the form and any answer index I (0 ≤ I ≤ 3), calling setCorrectAnswer
  * for that question and index SHALL result in exactly one answer option having isCorrect=true
  * (at index I) and all other answer options having isCorrect=false.
- *
- * **Validates: Requirements 6.2**
- */
+**/
 
 describe('Feature: quiz-crud-frontend, Property 6: Correct Answer Exclusivity', () => {
   let component: QuizFormComponent;
@@ -425,9 +417,7 @@ describe('Feature: quiz-crud-frontend, Property 6: Correct Answer Exclusivity', 
  * (i.e., the count of correct answers ≠ 1), the exactlyOneCorrect validator SHALL return a
  * validation error. *For any* question FormGroup where exactly one answer option has
  * isCorrect=true, the validator SHALL return null (valid).
- *
- * **Validates: Requirements 6.3**
- */
+**/
 
 describe('Feature: quiz-crud-frontend, Property 7: Correct Answer Validation', () => {
   it('validator returns error when correct count ≠ 1 (zero or more than one correct)', () => {

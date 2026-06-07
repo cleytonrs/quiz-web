@@ -6,9 +6,7 @@ import * as fc from 'fast-check';
  *
  * For any quiz with N total questions, when the user is on question index M (0-based),
  * the progress indicator SHALL report the current question as M + 1 and the total as N.
- *
- * **Validates: Requirements 2.2**
- */
+**/
 
 /**
  * Pure progress calculation logic extracted from QuizSessionComponent:
@@ -57,9 +55,7 @@ describe('Feature: quiz-app, Property 2: Progress Calculation', () => {
  *
  * For any quiz session at question index i (where i < totalQuestions - 1),
  * submitting an answer SHALL advance the current question index to i + 1.
- *
- * **Validates: Requirements 3.1**
- */
+**/
 
 /**
  * Pure navigation advancement logic extracted from QuizSessionComponent.advanceOrComplete:
@@ -111,9 +107,7 @@ describe('Feature: quiz-app, Property 3: Sequential Navigation Advancement', () 
  * For any quiz result with a topic name, score, and pass/fail status,
  * the generated share text SHALL contain the quiz topic name, the numeric score,
  * and the pass or fail status text.
- *
- * **Validates: Requirements 6.2**
- */
+**/
 
 /**
  * Pure share text generation logic extracted from QuizResultComponent:

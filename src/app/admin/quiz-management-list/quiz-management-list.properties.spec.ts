@@ -15,9 +15,7 @@ import { Observable, of } from 'rxjs';
  * *For any* array of QuizSummary objects returned by the service, the QuizManagementListComponent
  * SHALL render each quiz displaying its topic name, description, and question count, and each
  * rendered quiz item SHALL have an edit button and a delete button.
- *
- * **Validates: Requirements 2.1, 2.2**
- */
+**/
 
 // --- Arbitraries ---
 
@@ -117,9 +115,7 @@ describe('Feature: quiz-crud-frontend, Property 1: Quiz List Completeness', () =
  * *For any* list of QuizSummary objects and any quiz in that list, after a successful delete
  * operation for that quiz, the resulting list SHALL NOT contain that quiz and its length SHALL
  * be exactly one less than the original.
- *
- * **Validates: Requirements 5.3**
- */
+**/
 
 describe('Feature: quiz-crud-frontend, Property 4: Deletion Removes Quiz from List', () => {
   let fixture: ComponentFixture<QuizManagementListComponent>;

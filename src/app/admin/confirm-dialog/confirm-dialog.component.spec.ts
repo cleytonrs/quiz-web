@@ -6,9 +6,7 @@ import { ConfirmDialogComponent } from './confirm-dialog.component';
  * Unit tests for ConfirmDialogComponent
  *
  * Tests visibility toggling, confirmed/cancelled event emission.
- *
- * **Validates: Requirements 5.1, 5.4**
- */
+**/
 
 describe('ConfirmDialogComponent', () => {
   let component: ConfirmDialogComponent;
